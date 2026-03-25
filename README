@@ -1,0 +1,87 @@
+# 🏗️ AWS Three-Tier Web Architecture
+
+A production-grade three-tier web application architecture designed and deployed on AWS — built independently to demonstrate real-world cloud infrastructure skills.
+
+---
+
+## 📐 Architecture Overview
+
+```
+         [ Users / Internet ]
+                 │
+         [ Application Load Balancer ]
+                 │
+        ┌────────┴────────┐
+   [ Web Tier ]     [ App Tier ]
+   EC2 Instances    EC2 Instances
+        └────────┬────────┘
+                 │
+          [ Data Tier ]
+          RDS / Database
+```
+
+**Tier 1 — Presentation Layer (Web Tier)**
+- EC2 instances serving the frontend
+- Sits behind an Application Load Balancer (ALB)
+- Public-facing subnet within VPC
+
+**Tier 2 — Application Layer (App Tier)**
+- Business logic hosted on EC2
+- Private subnet — not directly accessible from the internet
+- Communicates only with Web Tier and Data Tier
+
+**Tier 3 — Data Layer (Database Tier)**
+- Isolated in a private subnet
+- Accessible only from the App Tier
+- Secured via Security Groups and IAM policies
+
+---
+
+## ☁️ AWS Services Used
+
+| Service | Purpose |
+|---|---|
+| **EC2** | Web and App tier compute instances |
+| **VPC** | Isolated network with public & private subnets |
+| **ALB** | Load balancing traffic across Web Tier |
+| **Security Groups** | Firewall rules between tiers |
+| **IAM** | Role-based access control |
+| **Route Tables** | Routing between subnets and internet |
+
+---
+
+## 🔐 Security Design
+
+- Web Tier only accepts traffic from ALB
+- App Tier only accepts traffic from Web Tier Security Group
+- Database Tier only accepts traffic from App Tier Security Group
+- No direct public access to App or Data tiers
+- IAM roles follow least-privilege principle
+
+---
+
+## 🚀 What I Learned
+
+- Designing multi-tier architecture with proper network isolation
+- Configuring VPC with public/private subnets and route tables
+- Setting up ALB with target groups and health checks
+- Applying security group chaining across tiers
+- Understanding real-world cloud deployment patterns
+
+---
+
+## 📁 Repo Structure
+
+```
+3tier/
+├── architecture/        # Architecture diagrams
+├── scripts/             # Setup and deployment scripts
+└── README.md
+```
+
+---
+
+## 👩‍💻 Author
+
+**Mounika G** — Cloud & DevOps Engineer  
+[LinkedIn](https://linkedin.com/in/mounika-g-129363285) · [Portfolio](https://i-am-monika.github.io) · [GitHub](https://github.com/i-am-monika)
